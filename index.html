@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selamat Ulang Tahun 💗</title>
+
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  PANDUAN CEPAT                                               ║
+  ║  1. Cari komentar "TARUH TEKS PESAN DI SINI"  → isi pesanmu  ║
+  ║  2. Cari "GANTI LINK FOTO 1–7 DI SINI"        → ganti src    ║
+  ║  3. Cari "GANTI LINK SPOTIFY DI SINI"         → ganti src    ║
+  ║  4. Cari "GANTI NAMA DI SINI"                 → nama si dia  ║
+  ║  Simpan file, lalu buka dengan browser (klik 2x).            ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<style>
+/* ============================================================
+   TOKEN WARNA & FONT
+   ============================================================ */
+:root{
+  --blush:#fff1f6;
+  --petal:#ffd3e2;
+  --rose:#f7a8c4;
+  --magenta:#c0286b;
+  --magenta-deep:#9d1d57;
+  --rosegold:#c98b7b;
+  --plum:#55213b;
+  --plum-soft:#7a4560;
+
+  --font-script:'Great Vibes','Brush Script MT',cursive;
+  --font-body:'Quicksand','Segoe UI',system-ui,sans-serif;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:var(--font-body);
+  color:var(--plum);
+  background:var(--petal);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+:focus-visible{outline:3px solid var(--magenta);outline-offset:3px}
+
+/* ============================================================
+   LATAR BELAKANG: gradien, balon, bintang kelap-kelip
+   ============================================================ */
+.bg{
+  position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  background:
+    radial-gradient(60rem 40rem at 12% 8%, rgba(255,255,255,.8), transparent 60%),
+    radial-gradient(50rem 40rem at 92% 30%, rgba(247,168,196,.55), transparent 60%),
+    linear-gradient(165deg,#fff4f8 0%,#ffdce8 45%,#f9c3d8 100%);
+}
+
+/* Balon terbang */
+.balloon{
+  position:absolute;
+  bottom:-170px;
+  left:var(--x);
+  width:calc(56px * var(--s));
+  opacity:.8;
+  will-change:transform;
+  animation:rise var(--dur) linear var(--delay) infinite;
+}
+.balloon i{
+  display:block;position:relative;
+  width:100%;aspect-ratio:.82;
+  border-radius:50% 50% 48% 48% / 58% 58% 42% 42%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255,255,255,.85) 0 7%, transparent 22%),
+    radial-gradient(circle at 50% 40%, var(--c), var(--c2));
+  box-shadow:inset -6px -8px 14px rgba(120,20,70,.18);
+  transform-origin:50% 120%;
+  animation:sway var(--sway) ease-in-out infinite alternate;
+}
+.balloon i::before{ /* simpul */
+  content:"";position:absolute;left:50%;bottom:-7px;
+  width:10px;height:9px;margin-left:-5px;
+  background:var(--c2);
+  clip-path:polygon(50% 0,100% 100%,0 100%);
+}
+.balloon i::after{ /* tali */
+  content:"";position:absolute;left:50%;top:100%;
+  width:1.5px;height:calc(70px * var(--s));margin-top:2px;
+  background:linear-gradient(rgba(150,70,100,.55),transparent);
+}
+@keyframes rise{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(var(--drift),-140vh,0)}
+}
+@keyframes sway{
+  from{transform:rotate(-6deg)}
+  to{transform:rotate(6deg)}
+}
+
+/* Bintang kelap-kelip */
+.spark{
+  position:absolute;
+  left:var(--x);top:var(--y);
+  width:var(--sz);height:var(--sz);
+  background:var(--c);
+  clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%);
+  opacity:0;
+  animation:twinkle var(--t) ease-in-out var(--d) infinite;
+}
+@keyframes twinkle{
+  0%,100%{opacity:0;transform:scale(.3) rotate(0deg)}
+  50%{opacity:.95;transform:scale(1) rotate(45deg)}
+}
+
+/* Kanvas konfeti */
+#confetti{
+  position:fixed;inset:0;z-index:50;
+  width:100%;height:100%;
+  pointer-events:none;
+}
+
+/* ============================================================
+   KONTEN UTAMA
+   ============================================================ */
+.page{position:relative;z-index:2}
+
+/* ---------- HERO ---------- */
+.hero{
+  min-height:100vh;min-height:100svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;
+  padding:4rem 1.25rem 3rem;
+}
+.title{
+  font-family:var(--font-script);
+  font-weight:400;
+  font-size:clamp(3.6rem,14vw,9rem);
+  line-height:1.08;
+  margin:0;
+  color:var(--magenta);
+}
+.word{display:inline-block;white-space:nowrap;margin:0 .1em}
+.letter{
+  display:inline-block;
+  color:var(--c,var(--magenta));
+  text-shadow:0 2px 0 rgba(255,255,255,.75),0 12px 30px rgba(192,40,107,.25);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1);
+  cursor:default;
+}
+.letter:hover{transform:translateY(-.12em) rotate(-5deg)}
+.js .letter{
+  animation:bounceIn 1.1s cubic-bezier(.28,.84,.42,1) backwards;
+  animation-delay:calc(var(--i) * 55ms + .2s);
+}
+@keyframes bounceIn{
+  0%{opacity:0;transform:translateY(-1.6em) scale(.5) rotate(-12deg)}
+  55%{opacity:1;transform:translateY(.12em) scale(1.08) rotate(3deg)}
+  75%{transform:translateY(-.06em) scale(.98)}
+  100%{opacity:1;transform:none}
+}
+
+.for{
+  margin:1.4rem 0 0;
+  font-size:clamp(1.15rem,3.4vw,1.5rem);
+  font-weight:600;
+  letter-spacing:.04em;
+  color:var(--plum-soft);
+}
+.for strong{color:var(--magenta-deep);font-weight:700}
+
+.actions{
+  margin-top:2.2rem;
+  display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center;
+}
+.js .for{animation:fadeIn .9s ease 1.9s backwards}
+.js .actions{animation:fadeIn .9s ease 2.2s backwards}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.btn{
+  font:inherit;font-weight:600;font-size:1rem;
+  padding:.85rem 1.6rem;
+  border-radius:999px;
+  border:1.5px solid transparent;
+  cursor:pointer;
+  text-decoration:none;
+  display:inline-flex;align-items:center;gap:.5rem;
+  transition:transform .2s ease,box-shadow .2s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn-primary{
+  background:linear-gradient(135deg,#d6407f,#b02266);
+  color:#fff;
+  box-shadow:0 12px 26px -10px rgba(176,34,102,.7);
+}
+.btn-ghost{
+  background:rgba(255,255,255,.55);
+  color:var(--magenta-deep);
+  border-color:rgba(192,40,107,.35);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+}
+
+/* ---------- SECTION UMUM ---------- */
+.section{
+  max-width:1100px;
+  margin:0 auto;
+  padding:clamp(3.5rem,9vw,7rem) 1.25rem;
+}
+.section-title{
+  font-family:var(--font-script);
+  font-weight:400;
+  font-size:clamp(2.8rem,9vw,4.8rem);
+  line-height:1.1;
+  text-align:center;
+  margin:0 0 .6rem;
+  color:var(--magenta-deep);
+}
+.section-note{
+  text-align:center;
+  margin:0 auto 2.5rem;
+  max-width:34rem;
+  color:var(--plum-soft);
+  font-weight:500;
+}
+
+/* ---------- PESAN (glassmorphism) ---------- */
+.card{
+  max-width:720px;
+  margin:0 auto;
+  padding:clamp(1.6rem,5vw,3.2rem);
+  border-radius:28px;
+  background:linear-gradient(145deg,rgba(255,255,255,.66),rgba(255,255,255,.3));
+  border:1px solid rgba(255,255,255,.85);
+  box-shadow:
+    0 30px 60px -28px rgba(157,29,87,.4),
+    0 2px 0 rgba(201,139,123,.35),
+    inset 0 1px 0 rgba(255,255,255,.95);
+  -webkit-backdrop-filter:blur(18px) saturate(140%);
+  backdrop-filter:blur(18px) saturate(140%);
+}
+.card p{
+  margin:0 0 1.2em;
+  font-size:clamp(1rem,2.6vw,1.12rem);
+  line-height:1.9;
+  font-weight:500;
+}
+.card .sign{
+  font-family:var(--font-script);
+  font-size:clamp(1.8rem,5vw,2.3rem);
+  line-height:1.2;
+  text-align:right;
+  margin:1.6rem 0 0;
+  color:var(--magenta);
+}
+
+/* ---------- GALERI POLAROID ---------- */
+.gallery{
+  display:flex;flex-wrap:wrap;justify-content:center;
+  padding:1.5rem .5rem 2.5rem;
+}
+.polaroid{
+  --r:0deg;--y:0px;--d:0ms;
+  position:relative;
+  width:clamp(150px,44vw,240px);
+  margin:-6px -4px;
+  padding:12px 12px 0;
+  background:#fffdfb;
+  border-radius:3px;
+  box-shadow:0 12px 26px -10px rgba(122,45,80,.4),0 2px 4px rgba(122,45,80,.12);
+  transform:rotate(var(--r)) translateY(var(--y));
+  transition:transform .45s cubic-bezier(.34,1.56,.64,1),box-shadow .45s ease;
+  cursor:pointer;
+  z-index:1;
+  -webkit-tap-highlight-color:transparent;
+}
+.polaroid::before{ /* selotip */
+  content:"";position:absolute;top:-12px;left:50%;
+  width:70px;height:22px;margin-left:-35px;
+  background:rgba(224,170,155,.6);
+  transform:rotate(-3deg);
+  box-shadow:0 1px 2px rgba(0,0,0,.08);
+}
+.polaroid:nth-child(even)::before{background:rgba(247,168,196,.75);transform:rotate(4deg)}
+.polaroid img{
+  display:block;width:100%;aspect-ratio:1/1;object-fit:cover;
+  background:#f6d7e1;
+}
+.polaroid figcaption{
+  font-family:var(--font-script);
+  font-size:clamp(1.3rem,4.6vw,1.75rem);
+  line-height:1.2;
+  text-align:center;
+  padding:10px 4px 14px;
+  color:var(--plum);
+}
+/* variasi kemiringan tiap foto */
+.polaroid:nth-child(1){--r:-6deg;--y:0px}
+.polaroid:nth-child(2){--r:4deg;--y:18px}
+.polaroid:nth-child(3){--r:-3deg;--y:-8px}
+.polaroid:nth-child(4){--r:7deg;--y:14px}
+.polaroid:nth-child(5){--r:-5deg;--y:0px}
+.polaroid:nth-child(6){--r:3deg;--y:-10px}
+.polaroid:nth-child(7){--r:-7deg;--y:12px}
+.polaroid:nth-child(1){--d:0ms}
+.polaroid:nth-child(2){--d:120ms}
+.polaroid:nth-child(3){--d:240ms}
+.polaroid:nth-child(4){--d:360ms}
+.polaroid:nth-child(5){--d:480ms}
+.polaroid:nth-child(6){--d:600ms}
+.polaroid:nth-child(7){--d:720ms}
+
+/* efek hover / sentuh: foto lurus + membesar */
+.polaroid:hover,
+.polaroid:focus-visible,
+.polaroid.active{
+  transform:rotate(0deg) translateY(-10px) scale(1.12);
+  z-index:20;
+  box-shadow:0 30px 44px -16px rgba(157,29,87,.5),0 4px 8px rgba(157,29,87,.15);
+}
+
+/* animasi foto "jatuh" saat galeri terlihat */
+.js .polaroid{opacity:0}
+.js .polaroid.in{
+  opacity:1;
+  animation:drop .9s cubic-bezier(.2,.8,.2,1) backwards;
+  animation-delay:var(--d);
+}
+@keyframes drop{
+  from{opacity:0;transform:translateY(-90px) rotate(calc(var(--r) * 3)) scale(1.1)}
+  60%{opacity:1}
+  to{opacity:1;transform:rotate(var(--r)) translateY(var(--y))}
+}
+
+/* ---------- MUSIK (Spotify) ---------- */
+.music-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1.25rem;
+}
+.track{
+  padding:10px;
+  border-radius:24px;
+  background:rgba(255,255,255,.45);
+  border:1px solid rgba(255,255,255,.8);
+  box-shadow:0 20px 40px -24px rgba(157,29,87,.45);
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+}
+.track iframe{
+  display:block;width:100%;height:352px;
+  border:0;border-radius:16px;
+}
+
+/* ---------- FOOTER ---------- */
+.foot{
+  text-align:center;
+  padding:2rem 1.25rem 4rem;
+  font-family:var(--font-script);
+  font-size:clamp(2rem,6vw,3rem);
+  color:var(--magenta);
+}
+.foot p{margin:0}
+
+/* ============================================================
+   RESPONSIF
+   ============================================================ */
+@media (max-width:860px){
+  .music-grid{grid-template-columns:1fr;max-width:520px;margin:0 auto}
+  .track iframe{height:152px}
+}
+@media (max-width:480px){
+  .btn{width:100%;justify-content:center}
+  .actions{width:100%;max-width:320px}
+}
+
+/* Hormati pengguna yang mengurangi animasi */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .balloons{display:none}
+  .spark{animation:none;opacity:.6}
+  .js .letter,.js .for,.js .actions,.js .polaroid.in{animation:none}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Latar belakang dekoratif (diisi oleh JavaScript) -->
+<div class="bg" aria-hidden="true">
+  <div class="balloons" id="balloons"></div>
+  <div class="sparks" id="sparks"></div>
+</div>
+<canvas id="confetti" aria-hidden="true"></canvas>
+
+<main class="page">
+
+  <!-- ==================== 1. HERO ==================== -->
+  <header class="hero">
+    <h1 class="title" id="title" aria-label="Selamat Ulang Tahun">Selamat Ulang Tahun</h1>
+
+    <!-- GANTI NAMA DI SINI (ubah tulisan [Nama]) -->
+    <p class="for"><strong>adeeeee oktaaaa</strong></p>
+
+    <div class="actions">
+      <a class="btn btn-primary" href="#pesan">Baca pesannya 💌</a>
+      <button class="btn btn-ghost" id="btnConfetti" type="button">Hujan konfeti lagi 🎉</button>
+    </div>
+  </header>
+
+  <!-- ==================== 2. PESAN ==================== -->
+  <section class="section" id="pesan">
+    <h2 class="section-title">Sepucuk pesan</h2>
+
+    <article class="card">
+      <!--
+        TARUH TEKS PESAN DI SINI
+        Ganti paragraf contoh di bawah dengan pesanmu.
+        Tiap paragraf dibungkus <p> ... </p>. Tambah / hapus <p> sesukamu.
+      -->
+      <p>selamat ulang tahun adeeeeeee 🎂🤍</p>
+
+      <p>semogaa adee sehat selaluu, panjangg umurr. semoga di umur adee yang sekarang ini berkah terus, dan rezeki adee semakin melimpahh dan lancar, serta dimudahkan dalam segala hal yang adee kerjakan.</p>
+
+      <p>terimakasih banyak yaaaa adeee. terimakasih karena adee udaa baik banget sama sapiikk, udaa sabar dengan kelakuannyaa sapikkk yang sukaa jail, ngerjain ade, dan tetaapp tulus samaa sapiikkk. terimakasih juga udaa mau kenal samaa sapiikk bukan cuma yang enak-enaknya aja, tapi adeee tetap mau ada di sisi sapikkk dan terimakasih juga udaa mauu berusaha buat kenal lebih dekat, mau paham samaa sapikk dan selalu berusaha jadi yang terbaik buat kita berduaaa, sapiikk seneng banget dan bersyukur punya adee sekarang ini. semoga dii umur ade yang sekarang ini bawa banyak kebahagiaan buat adee, dan semua yang adee harapkan bisa tercapai di umur yang baru inii.</p>
+
+      <p>Once again, Happy Birthday to you! I love you so much! 🤍🤍</p>
+
+      <!-- Tanda tangan / penutup (boleh diganti) -->
+      <p class="sign">Dari Sapikkk, dengan cinta</p>
+    </article>
+  </section>
+
+  <!-- ==================== 3. GALERI (7 FOTO) ==================== -->
+  <section class="section" id="galeri">
+    <h2 class="section-title">gaa sopan cantik banget sih</h2>
+
+    <div class="gallery" id="gallery">
+
+      <!-- GANTI LINK FOTO 1 DI SINI (ubah src, dan teks caption di bawahnya) -->
+      <figure class="polaroid" tabindex="0">
+        <img src="pic1.jpeg" alt="Foto kenangan 1" loading="lazy">
+        <figcaption>sarang beo 🫰🏻</figcaption>
+      </figure>
+
+      <!-- GANTI LINK FOTO 2 DI SINI -->
+      <figure class="polaroid" tabindex="0">
+        <img src="pic2.jpeg" alt="Foto kenangan 2" loading="lazy">
+        <figcaption>imutt kyut</figcaption>
+      </figure>
+
+      <!-- GANTI LINK FOTO 3 DI SINI -->
+      <figure class="polaroid" tabindex="0">
+        <img src="pic3.jpeg" alt="Foto kenangan 3" loading="lazy">
+        <figcaption>Masyallah</figcaption>
+      </figure>
+
+      <!-- GANTI LINK FOTO 4 DI SINI -->
+      <figure class="polaroid" tabindex="0">
+        <img src="pic4.jpeg" alt="Foto kenangan 4" loading="lazy">
+        <figcaption>kiww cewe</figcaption>
+      </figure>
+
+      <!-- GANTI LINK FOTO 5 DI SINI -->
+      <figure class="polaroid" tabindex="0">
+        <img src="pic5.jpeg" alt="Foto kenangan 5" loading="lazy">
+        <figcaption>Senyummu</figcaption>
+      </figure>
+
+      <!-- GANTI LINK FOTO 6 DI SINI -->
+      <figure class="polaroid" tabindex="0">
+        <img src="pic6.jpeg" alt="Foto kenangan 6" loading="lazy">
+        <figcaption>❤️🩷❤️</figcaption>
+      </figure>
+
+      <!-- GANTI LINK FOTO 7 DI SINI -->
+      <figure class="polaroid" tabindex="0">
+        <img src="pic7.jpeg" alt="Foto kenangan 7" loading="lazy">
+        <figcaption>cissss</figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+  <!-- ==================== 4. MUSIK (3 SPOTIFY) ==================== -->
+  <section class="section" id="musik">
+    <h2 class="section-title">Lagu untukmu</h2>
+    <p class="section-note">Tekan play dan nikmati.</p>
+
+    <!--
+      CARA MENDAPATKAN LINK SPOTIFY:
+      Buka Spotify → klik titik tiga (⋯) pada lagu/playlist → Bagikan (Share)
+      → Sematkan (Embed) → salin alamat yang ada di dalam src="..." lalu tempel di bawah.
+      Contoh bentuk: https://open.spotify.com/embed/track/XXXXXXXX
+                  atau https://open.spotify.com/embed/playlist/XXXXXXXX
+    -->
+    <div class="music-grid">
+
+      <!-- GANTI LINK SPOTIFY DI SINI (Lagu 1) -->
+      <div class="track">
+        <iframe src="https://open.spotify.com/embed/track/6PqWdGIYq5xdLaa4zCZfRp?si=e38c5fc26b6146a2"
+                title="Pemutar Spotify 1"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+      </div>
+
+      <!-- GANTI LINK SPOTIFY DI SINI (Lagu 2) -->
+      <div class="track">
+        <iframe src="https://open.spotify.com/embed/track/5JESuE80fvausWHjcT9QVh?si=6cc04e78c16e490c"
+                title="Pemutar Spotify 2"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+      </div>
+
+      <!-- GANTI LINK SPOTIFY DI SINI (Lagu 3) -->
+      <div class="track">
+        <iframe src="https://open.spotify.com/embed/track/0l13vtSXzPAKJ2m3q3WXX8?si=e2f38b02387f4d72"
+                title="Pemutar Spotify 3"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"></iframe>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>Sekali lagi, selamat ulang tahun 💗</p>
+  </footer>
+
+</main>
+
+<script>
+(function () {
+  'use strict';
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function rand(a, b) { return a + Math.random() * (b - a); }
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+  /* ==========================================================
+     1. JUDUL: pecah jadi huruf, beri gradasi rose gold → magenta
+     ========================================================== */
+  (function buildTitle() {
+    var el = document.getElementById('title');
+    var text = el.textContent.trim();
+    var from = [201, 139, 123];   // rose gold
+    var to   = [192, 40, 107];    // magenta
+    var letters = text.replace(/\s+/g, '').length;
+    var idx = 0;
+    el.textContent = '';
+
+    text.split(/\s+/).forEach(function (word, w, words) {
+      var wordEl = document.createElement('span');
+      wordEl.className = 'word';
+      wordEl.setAttribute('aria-hidden', 'true');
+      word.split('').forEach(function (ch) {
+        var t = letters > 1 ? idx / (letters - 1) : 0;
+        var rgb = from.map(function (f, k) { return Math.round(f + (to[k] - f) * t); });
+        var s = document.createElement('span');
+        s.className = 'letter';
+        s.textContent = ch;
+        s.style.setProperty('--i', idx);
+        s.style.setProperty('--c', 'rgb(' + rgb.join(',') + ')');
+        wordEl.appendChild(s);
+        idx++;
+      });
+      el.appendChild(wordEl);
+      if (w < words.length - 1) el.appendChild(document.createTextNode(' '));
+    });
+  })();
+
+  /* ==========================================================
+     2. BALON TERBANG
+     ========================================================== */
+  (function buildBalloons() {
+    var box = document.getElementById('balloons');
+    var palette = [
+      ['#ff9fc0', '#f06292'], ['#ffc1d6', '#f48fb1'], ['#e8a798', '#c98b7b'],
+      ['#f28ab8', '#c0286b'], ['#ffd0e0', '#f7a8c4'], ['#d86aa0', '#a8285f']
+    ];
+    var count = window.innerWidth < 640 ? 9 : 15;
+    for (var i = 0; i < count; i++) {
+      var c = pick(palette);
+      var dur = rand(20, 38);
+      var b = document.createElement('div');
+      b.className = 'balloon';
+      b.style.setProperty('--x', (i / count * 100 + rand(-3, 3)).toFixed(1) + '%');
+      b.style.setProperty('--s', rand(0.7, 1.5).toFixed(2));
+      b.style.setProperty('--dur', dur.toFixed(1) + 's');
+      b.style.setProperty('--delay', (-rand(0, dur)).toFixed(1) + 's');
+      b.style.setProperty('--drift', Math.round(rand(-90, 90)) + 'px');
+      b.style.setProperty('--sway', rand(3, 6).toFixed(1) + 's');
+      b.style.setProperty('--c', c[0]);
+      b.style.setProperty('--c2', c[1]);
+      b.appendChild(document.createElement('i'));
+      box.appendChild(b);
+    }
+  })();
+
+  /* ==========================================================
+     3. BINTANG KELAP-KELIP
+     ========================================================== */
+  (function buildSparks() {
+    var box = document.getElementById('sparks');
+    var colors = ['#ffffff', '#ffffff', '#e8a798', '#d4608f', '#f5c6a5'];
+    var count = window.innerWidth < 640 ? 24 : 40;
+    for (var i = 0; i < count; i++) {
+      var s = document.createElement('span');
+      s.className = 'spark';
+      s.style.setProperty('--x', rand(0, 98).toFixed(1) + '%');
+      s.style.setProperty('--y', rand(0, 98).toFixed(1) + '%');
+      s.style.setProperty('--sz', Math.round(rand(7, 18)) + 'px');
+      s.style.setProperty('--t', rand(2.5, 5).toFixed(1) + 's');
+      s.style.setProperty('--d', (-rand(0, 5)).toFixed(1) + 's');
+      s.style.setProperty('--c', pick(colors));
+      box.appendChild(s);
+    }
+  })();
+
+  /* ==========================================================
+     4. KONFETI (canvas)
+     ========================================================== */
+  var Confetti = (function () {
+    var canvas = document.getElementById('confetti');
+    var ctx = canvas.getContext('2d');
+    var colors = ['#ff8fb1', '#f06292', '#c0286b', '#ffc1d6', '#e8a798',
+                  '#c98b7b', '#ffffff', '#ffd6e4', '#f7a8c4'];
+    var W = 0, H = 0, parts = [], raining = false, rainEnd = 0;
+    var last = 0, raf = 0, acc = 0;
+
+    function resize() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = window.innerWidth; H = window.innerHeight;
+      canvas.width = W * dpr; canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    function base(x, y) {
+      return {
+        x: x, y: y, w: rand(6, 12), h: rand(4, 9),
+        rot: rand(0, 6.28), vr: rand(-6, 6),
+        flip: rand(0, 6.28), vf: rand(3, 8),
+        c: pick(colors), round: Math.random() < 0.25
+      };
+    }
+    function spawnRain() {
+      var p = base(rand(0, W), -20);
+      p.vx = rand(-30, 30); p.vy = rand(70, 170);
+      p.sway = rand(0, 6.28); p.swayS = rand(1, 3);
+      p.rain = true;
+      parts.push(p);
+    }
+    function burst(x, y, n) {
+      for (var i = 0; i < n; i++) {
+        var p = base(x, y);
+        var a = rand(-Math.PI * 0.95, -Math.PI * 0.05);
+        var sp = rand(180, 520);
+        p.vx = Math.cos(a) * sp; p.vy = Math.sin(a) * sp;
+        p.life = rand(1.4, 2.4); p.age = 0;
+        parts.push(p);
+      }
+      start();
+    }
+    function rain(ms) {
+      raining = true; rainEnd = performance.now() + ms;
+      start();
+    }
+    function start() {
+      if (!raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
+    }
+    function frame(t) {
+      var dt = Math.min((t - last) / 1000 || 0.016, 0.05);
+      last = t;
+      ctx.clearRect(0, 0, W, H);
+
+      if (raining) {
+        if (t > rainEnd) { raining = false; }
+        else {
+          acc += dt * (W < 640 ? 55 : 100);
+          while (acc >= 1) { spawnRain(); acc -= 1; }
+        }
+      }
+
+      for (var i = parts.length - 1; i >= 0; i--) {
+        var p = parts[i];
+        if (p.rain) {
+          p.sway += p.swayS * dt;
+          p.x += (p.vx + Math.sin(p.sway) * 40) * dt;
+          p.y += p.vy * dt;
+        } else {
+          p.age += dt;
+          p.vx *= 1 - 1.8 * dt;
+          p.vy += 700 * dt;
+          p.vy *= 1 - 0.6 * dt;
+          p.x += p.vx * dt; p.y += p.vy * dt;
+        }
+        p.rot += p.vr * dt; p.flip += p.vf * dt;
+
+        var dead = p.rain ? p.y > H + 30 : (p.age > p.life || p.y > H + 30);
+        if (dead) { parts.splice(i, 1); continue; }
+
+        var alpha = p.rain ? 1 : Math.min(1, (p.life - p.age) / 0.5);
+        ctx.save();
+        ctx.globalAlpha = alpha;
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.scale(1, Math.abs(Math.cos(p.flip)) * 0.9 + 0.1);
+        ctx.fillStyle = p.c;
+        if (p.round) {
+          ctx.beginPath(); ctx.arc(0, 0, p.w / 2.2, 0, 6.283); ctx.fill();
+        } else {
+          ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        }
+        ctx.restore();
+      }
+
+      if (parts.length || raining) { raf = requestAnimationFrame(frame); }
+      else { raf = 0; ctx.clearRect(0, 0, W, H); }
+    }
+
+    return { rain: rain, burst: burst };
+  })();
+
+  /* Hujan konfeti otomatis saat halaman dibuka */
+  window.addEventListener('load', function () {
+    if (!reduceMotion) setTimeout(function () { Confetti.rain(7000); }, 400);
+  });
+
+  /* Tombol "Hujan konfeti lagi" */
+  document.getElementById('btnConfetti').addEventListener('click', function (e) {
+    var r = e.currentTarget.getBoundingClientRect();
+    Confetti.burst(r.left + r.width / 2, r.top, reduceMotion ? 12 : 50);
+    if (!reduceMotion) Confetti.rain(4500);
+  });
+
+  /* ==========================================================
+     5. GALERI: jatuh bergantian + sentuh untuk meluruskan (HP)
+     ========================================================== */
+  (function gallery() {
+    var wrap = document.getElementById('gallery');
+    var items = Array.prototype.slice.call(wrap.querySelectorAll('.polaroid'));
+
+    function reveal() { items.forEach(function (el) { el.classList.add('in'); }); }
+
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) { reveal(); io.disconnect(); }
+      }, { threshold: 0.15 });
+      io.observe(wrap);
+    } else {
+      reveal();
+    }
+
+    items.forEach(function (el) {
+      el.addEventListener('click', function () {
+        var was = el.classList.contains('active');
+        items.forEach(function (x) { x.classList.remove('active'); });
+        if (!was) el.classList.add('active');
+      });
+      el.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      if (!e.target.closest('.polaroid')) {
+        items.forEach(function (x) { x.classList.remove('active'); });
+      }
+    });
+  })();
+
+  /* ==========================================================
+     6. Ketuk / klik di mana saja → letupan konfeti kecil
+     ========================================================== */
+  document.addEventListener('click', function (e) {
+    if (reduceMotion) return;
+    if (e.target.closest('a, button, iframe, input, textarea')) return;
+    Confetti.burst(e.clientX, e.clientY, 22);
+  });
+})();
+</script>
+</body>
+</html>
